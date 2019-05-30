@@ -1,0 +1,25 @@
+<!--TODO(1) Utiliza o ngIf e o ngFor para mostrar os itens da lista de espera -->
+<!--TODO(2) Colocar um botão ou ícone para remover o item da lista de espera -->
+<div fxLayout="column">
+    <div class="input-row" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Nome" [(ngModel)]="espera.nome">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Quantidade" [(ngModel)]="espera.qtde">
+      </mat-form-field>
+      <button mat-stroked-button fxFlex (click)="salvar(espera)">Salvar</button>
+    </div>
+    <div>
+      <mat-list *ngIf="esperas$ | async as esperas">
+        <mat-list-item *ngFor="let espera of esperas.data">
+          <p>
+            <span matBadge="{{espera.qtde}}" matBadgeOverlap="false" matBadgePosition="above before">{{espera.nome}}</span>
+          </p>
+          <button mat-icon-button (click)="remover(espera)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
